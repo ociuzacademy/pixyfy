@@ -1,0 +1,390 @@
+.card {
+    border-radius: 8px;
+    overflow: hidden;
+}
+.card-title {
+    font-weight: bold;
+    color: #333;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    position: relative;
+    margin: 10% auto;
+    width: 80%;
+    max-width: 800px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f7f7f7;
+}
+
+/* .album-container {
+    border: 5px solid #ccc;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    max-width: 850px;
+    background: #fff;
+} */
+ /* Page Container Styling */
+ .page-container {
+    border: 5px solid #ccc; /* Individual border for each page */
+    padding: 20px;
+    margin-bottom: 20px; /* Space between pages */
+    border-radius: 10px;
+    background: #fff; /* Background for each page */
+    page-break-after: always; /* Ensure each page breaks in print */
+}
+
+/* Image Grid Styling */
+.image-grid {
+    display: grid;
+    gap: 0px; /* Space between images */
+    margin-bottom: 40px;
+}
+
+.image-grid.one-photo {
+    grid-template-columns: 1fr; /* 1 column, full width for the single image */
+}
+
+.image-grid.one-photo .grid-item {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.image-grid.one-photo .grid-photo {
+    width: 100%;
+    height: 1100px;
+    object-fit: cover;
+}
+
+/* Two photos layout */
+.image-grid.two-photos {
+    grid-template-columns: 1fr 1fr;
+}
+.image-grid.two-photos .grid-item {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.image-grid.two-photos .grid-photo {
+    width: 100%;
+    height:700px;
+    object-fit: cover;
+}
+
+
+/* Three photos layout */
+.image-grid.three-photos {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.image-grid.three-photos .grid-item {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.image-grid.three-photos .grid-photo {
+    width: 100%;
+    height:700px;
+    object-fit: cover;
+}
+
+
+/* Default case: More than three photos */
+.image-grid {
+    grid-template-columns: repeat(3, 1fr); /* 4 columns for a larger grid */
+}
+
+
+/* Custom sizing for grid items (physical album style) */
+.grid-item:nth-child(1) {
+    grid-column: span 1; /* Spans 2 columns */
+    grid-row: span 2; /* Spans 2 rows */
+}
+
+.grid-item:nth-child(2) {
+    grid-column: span 1; /* Spans 1 column */
+    grid-row: span 1; /* Spans 1 row */
+}
+
+.grid-item:nth-child(3) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.grid-item:nth-child(4) {
+    grid-column: span 4;
+    grid-row: span 1;
+}
+
+.grid-item:nth-child(5) {
+    grid-column: span 2; /* Spans 2 columns */
+    grid-row: span 1; /* Spans 1 row */
+}
+
+.grid-item:nth-child(6) {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+.grid-item:nth-child(7) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.grid-item:nth-child(8) {
+    grid-column: span 3; /* Spans 3 columns */
+    grid-row: span 2; /* Spans 2 rows */
+}
+
+.grid-item:nth-child(9) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.grid-item:nth-child(10) {
+    grid-column: span 2; /* Spans 2 columns */
+    grid-row: span 1;
+}
+
+.grid-item:nth-child(11) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.grid-item:nth-child(12) {
+    grid-column: span 2; /* Spans 2 columns */
+    grid-row: span 1;
+}
+
+.grid-item:nth-child(13) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.grid-item:nth-child(14) {
+    grid-column: span 2; /* Spans 2 columns */
+    grid-row: span 1;
+}
+
+.grid-item:nth-child(15) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.grid-item:nth-child(16) {
+    grid-column: span 2; /* Spans 2 columns */
+    grid-row: span 2; /* Spans 2 rows */
+}
+
+/* Individual grid items */
+.grid-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 2px solid #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.grid-photo {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+/* Page Break for PDF or Printing */
+.page-break {
+    page-break-before: always; /* Forces a new page */
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+   
+ /* Portrait View Styles */
+ .portrait {
+    display: flex; /* Use flexbox to center */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    flex-direction: column; /* Stack items vertically */
+    width: 100%; /* Full width for portrait */
+    max-width: 900px; /* Increased max width for portrait */
+    margin: 0 auto; /* Center the container */
+}
+
+.portrait .grid-photo {
+    height: 500px; /* Adjust height for portrait */
+}
+
+/* Button Styles */
+#toggleViewButton {
+    margin: 20px auto;
+    display: block;
+    padding: 10px 20px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#toggleViewButton:hover {
+    background-color: #27ae60;
+}
+
+/* Page Break for PDF or Printing */
+@media print {
+    body {
+        width: 21cm; /* A4 Width */
+        height: 29.7cm; /* A4 Height */
+    }
+
+    #album-container {
+        width: 100%;
+        height: auto;
+        page-break-inside: avoid; /* Prevents breaking within containers */
+    }
+
+    .page-container {
+        page-break-after: always; /* Forces a new page after each page container */
+    }
+}
+/* Hover Effects for Image Actions */
+.grid-item .image-actions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* Add opacity for smooth transition */
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.grid-item .image-actions .action-icon {
+    margin: 10px;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.grid-item .image-actions .action-icon:hover {
+    color: #ccc;
+}
+
+/* Action Icon Container */
+.image-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 10;
+}
+
+/* Ensure proper visibility handling when toggled */
+.grid-item .image-actions.active {
+    display: flex;
+    opacity: 1;
+}
+
+.action-icon {
+    color: white;
+    font-size: 24px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.action-icon:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);  /* Change this to fit your layout */
+    gap: 10px;
+  }
+  
+ 
+  .grid-item.dragging {
+      opacity: 0.5;  /* Reduce opacity of the item being dragged */
+  }
+  
+  .drop-zone {
+      border: 2px dashed #ccc; /* Visual cue for drop area */
+      min-height: 200px; /* Ensure the drop area is large enough */
+  }
+ 
+ .resize-handle {
+    position: absolute;
+    width: 10px; /* Width of the handle */
+    height: 10px; /* Height of the handle */
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid #000;
+    cursor: nwse-resize; /* Change cursor to indicate resizing */
+    z-index: 10;
+}
+
+
+
+.bottom-right {
+    bottom: 0;
+    right: 0;
+}
+.center-text {
+    text-align: center;
+}
+
+
+/* 
+.top-left {
+    top: -5px;
+    left: -5px;
+}
+
+.top-right {
+    top: -5px;
+    right: -5px;
+}
+
+.bottom-left {
+    bottom: -5px;
+    left: -5px;
+} */
+
+

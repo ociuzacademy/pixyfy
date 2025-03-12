@@ -1,0 +1,54 @@
+{% extends "photographer/photogra_index.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>My Folders</h1>
+
+    {% if folders %}
+    <div class="row">
+        {% for folder in folders %}
+        <div class="col-md-4 mb-4">
+            <div class="card" style="width: 100%; max-width: 300px; height: auto;">
+                <!-- Folder Cover Image -->
+                <img src="/media/photographer_images/folder.png" class="card-img-top" alt="Folder Cover"
+                    style="height: 200px; object-fit: cover;">
+
+                <div class="card-body">
+                    <!-- Folder Name with spacing -->
+                    <h5 class="card-title" style="margin-bottom: 15px;">Name: {{ folder.folder_id }}</h5>
+
+                    <a href="{% url 'access_folder' folder.id %}" class="btn btn-primary">Access Folder</a>
+                    
+                    <!-- Link to View Liked Photos in this Folder -->
+                    <a href="{% url 'view_liked_photos' folder.id %}" class="btn btn-warning mt-2">View Liked Photos</a>
+
+                    <form method="POST" action="{% url 'delete_folder' %}">
+                        {% csrf_token %}
+                        <label for="password">Enter Folder Password to Delete:</label>
+                        <input type="password" name="password" required>
+                        <button type="submit" class="btn btn-danger">Delete Folder</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        No folders available. Please create a new folder.
+    </div>
+    {% endif %}
+
+    {% if messages %}
+    <div class="alert alert-dismissible fade show" role="alert">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <a href="{% url 'create_folder' %}" class="btn btn-secondary mt-3">Create New Folder</a>
+</div>
+{% endblock %}

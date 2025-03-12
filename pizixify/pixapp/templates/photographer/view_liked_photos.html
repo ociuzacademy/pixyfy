@@ -1,0 +1,31 @@
+{% extends "photographer/photogra_index.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Liked Photos in Folder: {{ folder.folder_id }}</h1>
+
+    {% if liked_photos %}
+    <div class="row">
+        {% for photo in liked_photos %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm" style="border-radius: 10px; overflow: hidden;">
+                <img src="{{ photo.image.url }}" class="card-img-top" alt="Liked Photo"
+                    style="height: 250px; object-fit: cover;">
+                <div class="card-body text-center">
+                    <p class="card-text">Liked Photo</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-warning text-center" role="alert">
+        No liked photos in this folder.
+    </div>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="{% url 'folder_list' %}" class="btn btn-secondary">Back to Folders</a>
+    </div>
+</div>
+{% endblock %}

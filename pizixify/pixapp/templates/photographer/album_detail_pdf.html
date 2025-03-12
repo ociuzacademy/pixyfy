@@ -1,0 +1,235 @@
+<!-- album_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page {
+            margin: 0;
+            /* Remove all margins */
+        }
+
+        /* General page and album container styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f7f7f7;
+        }
+
+        .album-container {
+            border: 5px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px;
+            max-width: 850px;
+            background: #fff;
+        }
+
+        /* Image Grid Styling */
+        .image-grid {
+            display: grid;
+            gap: 0px;
+            /* Space between images */
+            margin-bottom: 40px;
+        }
+
+        .image-grid.one-photo {
+            grid-template-columns: 1fr;
+            /* 1 column, full width for the single image */
+        }
+
+        .image-grid.one-photo .grid-item {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .image-grid.one-photo .grid-photo {
+            width: 100%;
+            height: 700px;
+            object-fit: cover;
+        }
+
+        /* Two photos layout */
+        .image-grid.two-photos {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .image-grid.two-photos .grid-item {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .image-grid.two-photos .grid-photo {
+            width: 100%;
+            height: 700px;
+            object-fit: cover;
+        }
+
+
+        /* Three photos layout */
+        .image-grid.three-photos {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .image-grid.three-photos .grid-item {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .image-grid.three-photos .grid-photo {
+            width: 100%;
+            height: 700px;
+            object-fit: cover;
+        }
+
+
+        /* Default case: More than three photos */
+        .image-grid {
+            grid-template-columns: repeat(3, 1fr);
+            /* 4 columns for a larger grid */
+        }
+
+
+        /* Custom sizing for grid items (physical album style) */
+        .grid-item:nth-child(1) {
+            grid-column: span 1;
+            /* Spans 2 columns */
+            grid-row: span 2;
+            /* Spans 2 rows */
+        }
+
+        .grid-item:nth-child(2) {
+            grid-column: span 1;
+            /* Spans 1 column */
+            grid-row: span 1;
+            /* Spans 1 row */
+        }
+
+        .grid-item:nth-child(3) {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .grid-item:nth-child(4) {
+            grid-column: span 4;
+            grid-row: span 1;
+        }
+
+        .grid-item:nth-child(5) {
+            grid-column: span 2;
+            /* Spans 2 columns */
+            grid-row: span 1;
+            /* Spans 1 row */
+        }
+
+        .grid-item:nth-child(6) {
+            grid-column: span 1;
+            grid-row: span 2;
+        }
+
+        .grid-item:nth-child(7) {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .grid-item:nth-child(8) {
+            grid-column: span 3;
+            /* Spans 3 columns */
+            grid-row: span 2;
+            /* Spans 2 rows */
+        }
+
+        .grid-item:nth-child(9) {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .grid-item:nth-child(10) {
+            grid-column: span 2;
+            /* Spans 2 columns */
+            grid-row: span 1;
+        }
+
+        .grid-item:nth-child(11) {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .grid-item:nth-child(12) {
+            grid-column: span 2;
+            /* Spans 2 columns */
+            grid-row: span 1;
+        }
+
+        .grid-item:nth-child(13) {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .grid-item:nth-child(14) {
+            grid-column: span 2;
+            /* Spans 2 columns */
+            grid-row: span 1;
+        }
+
+        .grid-item:nth-child(15) {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .grid-item:nth-child(16) {
+            grid-column: span 2;
+            /* Spans 2 columns */
+            grid-row: span 2;
+            /* Spans 2 rows */
+        }
+
+        /* Individual grid items */
+        .grid-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 2px solid #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-photo {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        /* Page Break for PDF or Printing */
+        .page-break {
+            page-break-before: always;
+            /* Forces a new page */
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="album-container" class="album-container">
+        <!-- Image Grid -->
+        {% for page, photos in photos_by_page %}
+        <div class="page-break">
+
+            <div
+                class="image-grid {% if photos|length == 1 %}one-photo{% elif photos|length == 2 %}two-photos{% elif photos|length == 3 %}three-photos{% endif %}">
+                {% for photo in photos %}
+                <div class="grid-item">
+                    <img src="{{ photo.absolute_url }}" alt="Photo {{ forloop.counter }}" class="grid-photo">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>

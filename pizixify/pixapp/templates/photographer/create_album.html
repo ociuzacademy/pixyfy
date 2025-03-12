@@ -1,0 +1,235 @@
+{% extends 'photographer/photogra_index.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Create Album</h1>
+
+    <!-- Folder Selection Form -->
+    <form method="GET" action="{% url 'create_album' %}" class="mb-4">
+        <div class="form-group">
+            <label for="folder_id">Select Folder:</label>
+            <select name="folder_id" id="folder_id" class="form-control" onchange="this.form.submit()">
+                <option value="">Choose a folder</option>
+                {% for folder in folders %}
+                    <option value="{{ folder.id }}" {% if selected_folder and selected_folder.id == folder.id %}selected{% endif %}>{{ folder.folder_id }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+
+    <!-- Album Creation Form -->
+    <form method="POST" action="{% url 'create_album' %}">
+        {% csrf_token %}
+        {% if selected_folder %}
+            <input type="hidden" name="folder_id" value="{{ selected_folder.id }}">
+        {% endif %}
+        
+        <div class="form-group">
+            <label for="title">Album Title:</label>
+            <input type="text" id="title" name="title" class="form-control" placeholder="Album Title" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="total_pages">Total Pages:</label>
+            <input type="number" id="total_pages" name="total_pages" class="form-control" min="0" value="0" required onchange="prepareModalInputs()">
+        </div>
+
+        <!-- Button to open the modal for photos per page -->
+        <button type="button" id="openModalButton" class="btn btn-primary" onclick="openModal()">Enter Photos per Page</button>
+
+        <!-- Modal for photos per page input -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2>Enter Photos for Each Page</h2>
+                <div id="page-inputs-container"></div>
+                <button type="button" id="doneButton" class="btn btn-success" onclick="closeModal()">Done</button>
+            </div>
+        </div>
+
+        <!-- Photo Selection -->
+        <h2 class="mt-4">Select Photos</h2>
+        <div class="photo-gallery row row-cols-2 row-cols-sm-3 row-cols-lg-6 g-2">
+            {% if photos %}
+                {% for photo in photos %}
+                    <div class="col">
+                        <div class="card photo-card">
+                            <img src="{{ photo.image.url }}" alt="Photo {{ forloop.counter }}" class="card-img-top">
+                            <div class="card-body text-center">
+                                <button type="button" class="btn btn-primary select-btn" data-photo-id="{{ photo.id }}" onclick="toggleSelect(this)" style="background-color: green;">Select</button>
+                                <input type="hidden" name="photos" value="{{ photo.id }}" class="photo-checkbox" disabled>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No Liked photos available in this folder.</p>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-success mt-4">Create Album</button>
+    </form>
+</div>
+
+<script>
+function toggleSelect(button) {
+    const photoCheckbox = button.nextElementSibling;
+
+    if (button.classList.contains('selected')) {
+        button.classList.remove('selected');
+        button.style.backgroundColor = 'green'; // Change to green when unselected
+        button.textContent = 'Select'; // Change text back to "Select"
+        photoCheckbox.disabled = true; // Disable the checkbox
+    } else {
+        button.classList.add('selected');
+        button.style.backgroundColor = 'red'; // Change to red when selected
+        button.textContent = 'Selected'; // Change text to "Selected"
+        photoCheckbox.disabled = false; // Enable the checkbox
+    }
+}
+
+function prepareModalInputs() {
+    const totalPages = document.getElementById('total_pages').value;
+    const container = document.getElementById('page-inputs-container');
+    container.innerHTML = ''; // Clear previous inputs
+
+    for (let i = 1; i <= totalPages; i++) {
+        const label = document.createElement('label');
+        label.textContent = `Photos for Page ${i}:`;
+
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.id = `photos_page_${i}`;
+        input.name = `photos_page_${i - 1}`;
+        input.min = '1';
+        input.value = '2'; // Default value
+        input.required = true;
+        input.classList.add('form-control', 'mb-2');
+
+        container.appendChild(label);
+        container.appendChild(input);
+    }
+}
+
+function openModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'block'; // Always display the modal
+}
+
+function closeModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'none';
+}
+</script>
+
+<style>
+/* Styling for photo gallery and modal */
+.photo-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.photo-card {
+    width: 150px; /* Adjusted card width for smaller size */
+    height: 220px; /* Adjusted card height */
+    margin: auto; /* Center-align cards */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.photo-card:hover {
+    transform: scale(1.05); /* Add hover effect */
+}
+
+.card-img-top {
+    width: 100%;
+    height: 120px; /* Fixed height for images */
+    object-fit: cover; /* Ensures images are cropped proportionally */
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80px; /* Ensure consistent size for the body */
+    padding: 5px;
+}
+
+.select-btn {
+    width: 100%; /* Make the button take the full width */
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    margin: 10% auto;
+    background: white;
+    padding: 20px;
+    width: 50%;
+    border-radius: 10px;
+    text-align: center;
+    max-height: 70vh; /* Set a maximum height for the modal */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+button[type="submit"],
+#openModalButton,
+#doneButton {
+    width: 100%; /* Make buttons full width */
+}
+
+button[type="submit"] {
+    margin-top: 20px;
+    background-color: #2ecc71; /* Green color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #27ae60; /* Darker green for hover effect */
+}
+
+#openModalButton {
+    background-color: #27ae60; /* Blue color */
+    color: white;
+}
+
+#openModalButton:hover {
+    background-color: #27ae60; /* Darker blue for hover effect */
+}
+
+#doneButton {
+    background-color: #2ecc71; /* Green color for the Done button */
+    color: white;
+}
+
+#doneButton:hover {
+    background-color: #27ae60; /* Darker green on hover */
+}
+</style>
+{% endblock %}

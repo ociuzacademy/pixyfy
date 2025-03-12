@@ -1,0 +1,53 @@
+/* nav.css */
+
+/* Set Navbar height */
+.navbar {
+    height: 80px; /* Adjust as needed */
+}
+
+/* Navbar links size and padding */
+.navbar-nav .nav-link {
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+    font-size: 16px; /* Adjust text size */
+    padding: 10px 15px; /* Adjust link padding for more/less spacing */
+}
+
+/* Active and hover effects */
+.navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+    color: #007bff !important;
+}
+
+/* Dropdown menu styles */
+.dropdown-menu {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Dropdown item styles */
+.dropdown-menu .dropdown-item {
+    transition: all 0.3s;
+    padding: 10px 15px;
+    font-size: 14px; /* Adjust font size inside the dropdown */
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background: #007bff;
+    color: white;
+}
+
+/* Toggler button style */
+.navbar-toggler {
+    border: none;
+    outline: none;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* Optional: Adjust navbar logo size */
+.navbar-brand h1 {
+    font-size: 24px; /* Change this value to adjust the logo text size */
+}

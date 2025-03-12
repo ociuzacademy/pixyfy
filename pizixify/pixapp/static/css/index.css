@@ -1,0 +1,15 @@
+/* Custom styles for the navbar */
+.navbar {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #ddd;
+}
+
+.navbar-brand h1 {
+    font-size: 32px;
+    color: #007bff;
+}
+
+/* Other custom styles */
+.photo-container {
+    margin-top: 120px;
+}

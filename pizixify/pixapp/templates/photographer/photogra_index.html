@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <title>Pixzify - Photo Studio Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
+    <!-- Favicon -->
+    <link href="static/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+
+    <!-- Libraries Stylesheet -->
+    <link href="/static/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/static/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/nav.css' %}" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <!-- <link href="/static/css/style.css" rel="stylesheet"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
+
+</head>
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light fixed-top shadow-sm px-4 px-lg-5">
+    <a href="{% url 'photogra_index' %}" class="navbar-brand d-block d-lg-none">
+        <h1 class="text-primary fw-bold">PIXZIFY</h1>
+    </a>
+    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="{% url 'photogra_index' %}" class="navbar-brand bg-primary py-2 px-4 mx-3 d-none d-lg-block rounded shadow">
+        <h1 class="text-white fw-bold m-0">PIXZIFY</h1>
+    </a>
+    <div class="collapse navbar-collapse justify-content-between py-3" id="navbarCollapse">
+        <div class="navbar-nav ms-auto">
+            <a href="{% url 'photogra_index' %}" class="nav-item nav-link active">Home</a>
+            <a href="/photogra_profile/" class="nav-item nav-link">Profile</a>
+            <a href="{% url 'create_folder' %}" class="nav-item nav-link">Folder</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Albums</a>
+                <div class="dropdown-menu border-0 shadow-lg rounded">
+                    <a href="{% url 'create_album' %}" class="dropdown-item">Create Album</a>
+                    <a href="{% url 'view_created_albums' %}" class="dropdown-item">View Albums</a>
+                </div>
+            </div>
+            <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
+        </div>
+
+    </div>
+</nav>
+<br><br><br><br>
+<br>
+<br>
+
+
+
+{% block content %}
+<!-- Header Start -->
+<div class="container-fluid hero-header bg-light py-5 mb-5">
+    <div class="container py-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <p class="text-primary text-uppercase mb-2 animated slideInDown">Welcome To Pizxify</p>
+                <h1 class="display-4 mb-3 animated slideInDown">Create beautiful albums that tell your unique story</h1>
+                <p class="animated slideInDown"> Your ultimate destination for creating beautiful, personalized albums. Whether it's for weddings, family gatherings, or special milestones, our user-friendly platform allows you to effortlessly design stunning albums that capture your most cherished memories. </p>
+                <div class="d-flex align-items-center pt-4 animated slideInDown">
+                    <h1 style="color: #EAA636;">Unleash Your Imagination!</h1>  
+                </div>
+            </div>
+            <div class="col-lg-6 animated fadeIn">
+                <div class="row g-3">
+                    <div class="col-6 text-end">
+                        <img class="img-fluid bg-white p-3 w-100 mb-3" src="/static/img/hero-1.jpg" alt="">
+                        <img class="img-fluid bg-white p-3 w-100" src="/static/img/12.jpeg" alt="">
+                    </div>
+                    <div class="col-6">
+                        <img class="img-fluid bg-white p-3 w-100 mb-3" src="/static/img/h.jpg" alt="">
+                        <img class="img-fluid bg-white p-3 w-100" src="/static/img/hero-2.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- About Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="row g-3 img-twice position-relative h-100">
+                    <div class="col-6">
+                        <img class="img-fluid bg-light p-3" src="/static/img/cover.jpg" alt="">
+                    </div>
+                    <div class="col-6 align-self-end">
+                        <img class="img-fluid bg-light p-3" src="/static/img/c2.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="h-100">
+                    <p class="text-primary text-uppercase mb-2">About Us</p>
+                    <h1 class="display-6 mb-4">Craft Your Memory Book</h1>
+                    <p>Pixzify is your go-to destination for creating stunning, personalized photo albums. Our platform offers a range of customization options to help you capture and celebrate your most cherished memories. Start crafting your unique album today!"</p>
+                    <!-- <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p> -->
+                    <div class="row g-2 mb-4">
+                        <div class="col-sm-6">
+                            <i class="fa fa-check text-primary me-3"></i>User Friendly
+                        </div>
+                        <div class="col-sm-6">
+                            <i class="fa fa-check text-primary me-3"></i>Easy to customize
+                        </div>
+                        <div class="col-sm-6">
+                            <i class="fa fa-check text-primary me-3"></i>Shareable Albums
+                        </div>
+                        <div class="col-sm-6">
+                            <i class="fa fa-check text-primary me-3"></i>Drag-and-Drop Interface
+                        </div>
+                    </div>
+                    <a class="btn btn-primary py-3 px-5" href="">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+<!-- Facts Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <p class="text-primary text-uppercase mb-2">Why Choose Us!</p>
+            <h1 class="display-6 mb-5">The Leading Photo Studio In The Country</h1>
+        </div>
+        <div class="row g-3">
+            <div class="col-lg-4 col-md-6 pt-lg-5 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="fact-item bg-light text-center h-100 p-5">
+                    <h1 class="display-2 text-primary mb-3" data-toggle="counter-up">35</h1>
+                    <h4 class="mb-3">Award Winning</h4>
+                    <span>Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo</span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="fact-item bg-light text-center h-100 p-5">
+                    <h1 class="display-2 text-primary mb-3" data-toggle="counter-up">45</h1>
+                    <h4 class="mb-3">Years Experience</h4>
+                    <span>Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo</span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 pt-lg-5 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="fact-item bg-light text-center h-100 p-5">
+                    <h1 class="display-2 text-primary mb-3" data-toggle="counter-up">12345</h1>
+                    <h4 class="mb-3">Happy Clients</h4>
+                    <span>Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Facts End -->
+<!-- Service Start -->
+<div class="container-xxl bg-light py-5 my-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <p class="text-primary text-uppercase mb-2">Our Services</p>
+            <h1 class="display-6 mb-4">We Deliver Top-Quality Services</h1>
+        </div>
+        <div class="row g-3">
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item d-flex flex-column bg-white p-3 pb-0">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="/static/img/service-1.jpg" alt="">
+                        <div class="service-overlay">
+                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""></a>
+                        </div>
+                    </div>
+                    <div class="text-center p-4">
+                        <h4>Weddings</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 pt-lg-5 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item d-flex flex-column bg-white p-3 pb-0">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="/static/img/service-2.jpg" alt="">
+                        <div class="service-overlay">
+                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""></a>
+                        </div>
+                    </div>
+                    <div class="text-center p-4">
+                        <h4>Portraits</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="service-item d-flex flex-column bg-white p-3 pb-0">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="/static/img/service-3.jpg" alt="">
+                        <div class="service-overlay">
+                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""></a>
+                        </div>
+                    </div>
+                    <div class="text-center p-4">
+                        <h4>Fashion</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 pt-lg-5 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="service-item d-flex flex-column bg-white p-3 pb-0">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="/static/img/service-4.jpg" alt="">
+                        <div class="service-overlay">
+                            <a class="btn btn-lg-square btn-outline-light rounded-circle" href=""></a>
+                        </div>
+                    </div>
+                    <div class="text-center p-4">
+                        <h4>Editorial</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Service End -->
+<!-- Project Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <p class="text-primary text-uppercase mb-2">Our Works</p>
+            <h1 class="display-6 mb-0">Discover the Beauty Captured in Our Unique Albums</h1>
+        </div>
+        <div class="row g-3">
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <div class="project-item">
+                            <img class="img-fluid" src="/static/img/project-5.jpg" alt="">
+                            <a class="project-title h5 mb-0" href="/static/img/project-5.jpg" data-lightbox="project">
+                                Memory
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="project-item">
+                            <img class="img-fluid" src="/static/img/project-1.jpg" alt="">
+                            <a class="project-title h5 mb-0" href="/static/img/project-1.jpg" data-lightbox="project">
+                                Wedding
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <div class="project-item">
+                            <img class="img-fluid" src="/static/img/project-2.jpg" alt="">
+                            <a class="project-title h5 mb-0" href="/static/img/project-2.jpg" data-lightbox="project">
+                                Portrait
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="project-item">
+                            <img class="img-fluid" src="/static/img/project-6.jpg" alt="">
+                            <a class="project-title h5 mb-0" href="/static/img/project-6.jpg" data-lightbox="project">
+                                Travel
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <div class="project-item">
+                            <img class="img-fluid" src="/static/img/project-7.jpg" alt="">
+                            <a class="project-title h5 mb-0" href="/static/img/project-7.jpg" data-lightbox="project">
+                                Wedding
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="project-item">
+                            <img class="img-fluid" src="/static/img/project-3.jpg" alt="">
+                            <a class="project-title h5 mb-0" href="/static/img/project-3.jpg" data-lightbox="project">    
+                                Memory
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <div class="project-item">
+                            <img class="img-fluid" src="/static/img/project-4.jpg" alt="">
+                            <a class="project-title h5 mb-0" href="/static/img/project-4.jpg" data-lightbox="project">
+                                Fashion
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="project-item">
+                            <img class="img-fluid" src="/static/img/project-8.jpg" alt="">
+                            <a class="project-title h5 mb-0" href="/static/img/project-8.jpg" data-lightbox="project">
+                                Portrait
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Project End -->
+ <!-- Testimonial Start -->
+<!-- Testimonial Start -->
+<div class="container-xxl py-5">
+<div class="container">
+    <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+        <p class="text-primary text-uppercase mb-2">Client's Review</p>
+        <h1 class="display-6 mb-0">More Than 20000+ Customers Trusted Us</h1>
+    </div>
+    <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+        <div class="testimonial-item bg-white p-4">
+            <div class="d-flex align-items-center mb-4">
+                <img class="flex-shrink-0 rounded-circle border p-1" src="/static/img/image1.jpg" alt="">
+                
+            </div>
+            <p class="mb-0" style="color: black;">"I am beyond impressed with this online album-creating platform.Uploading photos was quick and hassle-free, and I loved how I could preview the album before finalizing it." </p>
+        </div>
+        <div class="testimonial-item bg-white p-4">
+            <div class="d-flex align-items-center mb-4">
+                <img class="flex-shrink-0 rounded-circle border p-1" src="/static/img/image2.jpg" alt="">
+            </div>
+            <p class="mb-0" style="color: black;">"This is hands down the best photo album maker I've ever used. The website's layout is clean and straightforward, making the entire process so smooth.It's a memory keeper I'll cherish forever."</p>
+        </div>
+        <div class="testimonial-item bg-white p-4">
+            <div class="d-flex align-items-center mb-4">
+                <img class="flex-shrink-0 rounded-circle border p-1" src="/static/img/image3.jpg" alt="">  
+            </div>
+            <p class="mb-0" style="color: black;">"My experience with this platform was delightful! The extensive customization options enabled me to create an album that captured the true essence of my memory."</p>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Testimonial End -->
+{% endblock %}
+
+<!-- Footer Start -->
+<div class="container-fluid footer position-relative bg-dark text-white-50 mt-5 py-5 px-4 px-lg-5 wow fadeIn"
+    data-wow-delay="0.1s">
+    <div class="row g-5 py-5">
+        <div class="col-lg-6 pe-lg-5">
+            <a href="index.html" class="navbar-brand">
+                <h1 class="display-5 text-primary">PIXZIFY</h1>
+            </a>
+            
+            <p><i class="fa fa-map-marker-alt me-2"></i>123 Street, New York, USA</p>
+            <p><i class="fa fa-phone-alt me-2"></i>+012 345 67890</p>
+            <p><i class="fa fa-envelope me-2"></i>info@example.com</p>
+            <div class="d-flex justify-content-start mt-4">
+                <a class="btn btn-square btn-outline-primary rounded-circle me-2" href="#"><i
+                        class="fab fa-twitter"></i></a>
+                <a class="btn btn-square btn-outline-primary rounded-circle me-2" href="#"><i
+                        class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-square btn-outline-primary rounded-circle me-2" href="#"><i
+                        class="fab fa-linkedin-in"></i></a>
+                <a class="btn btn-square btn-outline-primary rounded-circle me-2" href="#"><i
+                        class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-6 ps-lg-5">
+            <div class="row g-5">
+                <div class="col-sm-6">
+                    <h4 class="text-light mb-4">Quick Links</h4>
+                    <a class="btn btn-link" href="">About Us</a>
+                    <a class="btn btn-link" href="">Contact Us</a>
+                    <a class="btn btn-link" href="">Our Services</a>
+                    <a class="btn btn-link" href="">Terms & Condition</a>
+                    <a class="btn btn-link" href="">Support</a>
+                </div>
+                <div class="col-sm-6">
+                    <h4 class="text-light mb-4">Popular Links</h4>
+                    <a class="btn btn-link" href="">About Us</a>
+                    <a class="btn btn-link" href="">Contact Us</a>
+                    <a class="btn btn-link" href="">Our Services</a>
+                    <a class="btn btn-link" href="">Terms & Condition</a>
+                    <a class="btn btn-link" href="">Support</a>
+                </div>
+                <div class="col-sm-12">
+                    <h4 class="text-light mb-4">Newsletter</h4>
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" class="form-control border-0 bg-secondary" style="padding: 20px 30px;"
+                                placeholder="Your Email Address"><button class="btn btn-primary px-4">Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+
+<!-- Copyright Start -->
+<div class="container-fluid bg-dark text-white border-top border-secondary px-0">
+    <div class="d-flex flex-column flex-md-row justify-content-between">
+        <div class="py-4 px-5 text-center text-md-start">
+            <p class="mb-0">&copy; <a class="text-primary" href="#">Your Site Name</a>. All Rights Reserved.</p>
+        </div>
+        <div class="py-4 px-5 bg-secondary footer-shape position-relative text-center text-md-end">
+            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+            <p class="mb-0">Designed by <a class="text-primary fw-bold" href="https://htmlcodex.com">HTML Codex</a></p>
+            Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+        </div>
+    </div>
+</div>
+<!-- Copyright End -->
+
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/static/lib/wow/wow.min.js"></script>
+<script src="/static/lib/easing/easing.min.js"></script>
+<script src="/static/lib/waypoints/waypoints.min.js"></script>
+<script src="/static/lib/counterup/counterup.min.js"></script>
+<script src="/static/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="/static/lib/lightbox/js/lightbox.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="/static/js/main.js"></script>
+<!-- JavaScript for Navbar Hide/Show -->
+
+</body>
+
+</html>

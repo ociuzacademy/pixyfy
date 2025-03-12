@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+{% block content %}
+<br>
+<br>
+
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto" style="max-width: 500px;">
+                <h1 class="display-6 mb-5">Photographer Register</h1>
+            </div>
+            <div class="row g-0 justify-content-center">
+                <div class="col-lg-8">
+                    {% if error_message %}
+                        <div class="alert alert-danger">{{ error_message }}</div>
+                    {% endif %}
+                    <form method="POST" action="{% url 'photogra_register' %}">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                                    <label for="name">Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="Your Email" required>
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <input type="password" name="pswd" class="form-control" id="pswd" placeholder="Password" maxlength="6" required>
+                                    <label for="pswd">Password</label>
+                                </div>
+                            </div>                            
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <input type="password" name="cpswd" class="form-control" id="cpswd" placeholder="Password" maxlength="6" required>
+                                    <label for="cpswd">Confirm Password</label>
+                                </div>
+                            </div>
+
+                            <div class="col-12 text-center">
+                                <button class="btn btn-primary py-3 px-5" type="submit">Register</button>
+                                <div class="text-center mt-3">
+                                    <p>Already have an account? <a href="/login/">Login here</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+</body>
+</html>

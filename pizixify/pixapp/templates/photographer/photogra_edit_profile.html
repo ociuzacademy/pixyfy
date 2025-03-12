@@ -1,0 +1,48 @@
+{% extends "photographer/photogra_index.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="profile-header text-center">
+        <h1>Edit Photographer Profile</h1>
+    </div>
+    <div class="card mt-4">
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                <!-- CSRF Token -->
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ data.name }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ data.email }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="pswd" class="form-label">Password</label>
+                    <input type="password" maxlength="6" class="form-control" id="pswd" name="pswd"
+                        placeholder="Leave blank to keep current password">
+                </div>
+                <div class="mb-3">
+                    <label for="place" class="form-label">Place</label>
+                    <input type="text" class="form-control" id="place" name="place" value="{{ data.place }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <textarea class="form-control" id="address" name="address" required>{{ data.address }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Profile Image</label>
+                    <input type="file" class="form-control" id="image" name="image">
+                    {% if data.image %}
+                    <img src="{{ data.image.url }}" alt="Profile Image" class="mt-2 img-fluid"
+                        style="max-width: 150px;">
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-primary">Update Profile</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

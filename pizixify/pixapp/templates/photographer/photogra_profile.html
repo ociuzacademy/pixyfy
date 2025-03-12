@@ -1,0 +1,24 @@
+{% extends "photographer/photogra_index.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="profile-header text-center">
+        <h1>Photographer Profile</h1>
+    </div>
+    <div class="card mt-4">
+        <div class="card-body text-center">
+            {% if data.image %}
+            <img src="{{ data.image.url }}" alt="Profile Image" class="img-fluid rounded-circle mb-3"
+                style="max-width: 150px;">
+            {% endif %}
+            <h5 class="card-title">{{ data.name }}</h5>
+            <p class="card-text"><strong>Email:</strong> {{ data.email }}</p>
+            <p class="card-text"><strong>Place:</strong> {{ data.place }}</p>
+            <p class="card-text"><strong>Address:</strong> {{ data.address }}</p>
+        </div>
+        <div class="card-footer text-center">
+            <a href="{% url 'photogra_edit_profile' %}" class="btn btn-secondary">Edit Profile</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'photographer/photogra_index.html' %}
+
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <p class="text-primary text-uppercase mb-2"><b>ADD PHOTOS</b></p>
+            <h1 class="display-6 mb-5">Upload Photos to Folder: {{ folder.folder_id }}</h1>
+        </div>
+
+        <!-- Success message display -->
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="container mt-5">
+            <form method="POST" enctype="multipart/form-data" action="{% url 'add_photos' folder.id %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="photos" class="form-label">Select Photos</label>
+                    <input type="file" class="form-control" id="photos" name="photos" multiple required>
+                </div>
+                <button type="submit" class="btn btn-primary">Upload Photos</button>
+            </form>
+
+            <h2 class="mt-5">Uploaded Photos</h2>
+            {% if photos %}
+            <div class="row">
+                {% for photo in photos %}
+                <div class="col-md-3 mb-3">
+                    <div class="card">
+                        <img src="{{ photo.image.url }}" class="card-img-top img-thumbnail" alt="Photo"
+                            style="width: 200px; height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <p class="card-text">Uploaded at: {{ photo.uploaded_at }}</p>
+                            <p class="card-text">Order: {{ photo.order }}</p>
+
+                            <!-- Delete button -->
+                            <form method="POST" action="{% url 'delete_photo' photo.id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>No photos uploaded yet.</p>
+            {% endif %}
+
+            <a href="{% url 'folder_list' %}" class="btn btn-secondary mt-3">Back to Folder List</a>
+        </div>
+    </div>
+</div>
+<style>
+    .photo-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .card-img-top {
+        flex-grow: 1;
+        object-fit: cover;
+        /* Ensures the image covers the available space */
+        height: 200px;
+        /* Set the image height */
+    }
+
+    .text-center {
+        margin-top: 10px;
+    }
+</style>
+{% endblock %}
