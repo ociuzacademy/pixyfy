@@ -1676,9 +1676,6 @@ def update_custom_photo_order(request):
 
     return JsonResponse({'success': False, 'error': 'Invalid method'})
 
-
-
-from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import ClientPhoto
 from django.shortcuts import render, redirect, get_object_or_404
